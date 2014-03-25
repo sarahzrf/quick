@@ -14,7 +14,7 @@ end
 class RFuseCheck
 	include Singleton
 
-	define can_write?: true, can_mkdir?: false
+	define can_write?: true, can_mkdir?: false, times: [Time.now] * 3
 end
 
 class DRbPort
@@ -22,7 +22,7 @@ class DRbPort
 
 	attr_accessor :drb_port
 
-	define file?: true, can_read?: true
+	define file?: true, can_read?: true, times: [Time.now] * 3
 
 	def read_file(path)
 		drb_port.to_s
@@ -40,13 +40,24 @@ class MethodFile
 	end
 
 	def read_file(path)
+		@atime = Time.now
 		@working_source
 	end
 
 	def write_to(path, src)
 		@working_source = src
+		@mtime = @ctime = Time.now
 		define!
 	rescue ArgumentError
+	end
+
+	def touch(path)
+		@mtime = Time.now
+	end
+
+	def times(path)
+		now = Time.now
+		[@atime ||= now, @mttime ||= now, @ctime ||= now]
 	end
 
 	private
@@ -96,9 +107,19 @@ class ModuleDir
 	end
 
 	path_method :contents do
+		@atime = Time.now
 		submods.map(&:to_s) +
 			submeths.map(&:to_s) <<
 			'#singleton_class'
+	end
+
+	path_method :touch do
+		@mtime = Time.now
+	end
+
+	path_method :times do
+		now = Time.now
+		[@atime ||= now, @mttime ||= now, @ctime ||= now]
 	end
 
 	path_method :directory?, true
