@@ -24,7 +24,7 @@ class DRbPort
 
 	define file?: true, can_read?: true
 
-	def read_file
+	def read_file(path)
 		drb_port.to_s
 	end
 end
@@ -50,7 +50,7 @@ class MethodFile
 	end
 
 	private
-	
+
 	def define!
 		sexp = Parser.parse @working_source
 		unless sexp and sexp.node_type == :defn
@@ -143,9 +143,11 @@ class ModuleDir
 	end
 
 	def submods
-		@mod.constants(false).select {|c| @mod.const_get(c).is_a? Module}
+		consts = @mod.constants(false)
+		consts.delete :fatal
+		consts.select {|c| @mod.const_get(c).is_a? Module}
 	end
-	
+
 	def submeths
 		@mod.method_files.keys.map {|name| name + '.rb'}
 	end
