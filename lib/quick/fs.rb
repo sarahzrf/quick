@@ -141,7 +141,11 @@ module Quick
 							FuseFS::DEFAULT_FS.send name, child, *args
 						end
 					else
-						instance_exec *args, &body if body
+						if body
+							instance_exec *args, &body
+						else
+							FuseFS::DEFAULT_FS.send name, child, *args
+						end
 					end
 				end
 			end
