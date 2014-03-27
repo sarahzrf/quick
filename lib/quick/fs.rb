@@ -22,20 +22,29 @@ module Quick
 		class FSConstant
 			include Singleton
 
-			attr_accessor :contents
+			attr_writer :contents
 
 			define file?: true, can_read?: true, times: [Time.now] * 3
 
+			def contents
+				if @contents.respond_to? :call
+					@contents.call
+				else
+					@contents
+				end
+			end
+
 			def size(path)
-				@contents.bytesize
+				contents.bytesize
 			end
 
 			def read_file(path)
-				@contents.to_s
+				contents.to_s
 			end
 		end
 
-		DRbURI = Class.new FSConstant
+		BrBURI = Class.new FSConstant
+		BrBURI.contents = proc {BrB::Service.uri}
 		FSRoot = Class.new FSConstant
 
 		class ROCodeFile
@@ -179,8 +188,8 @@ module Quick
 				case name
 				when '._rfuse_check_'
 					RFuseCheck.instance
-				when '#drb_uri'
-					DRbURI.instance
+				when '#brb_uri'
+					BrBURI.instance
 				when '#fs_root'
 					FSRoot.instance
 				when '#singleton_class'
