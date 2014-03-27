@@ -1,5 +1,7 @@
 require 'pry-remote-em/server'
+require 'brb'
 require_relative 'core_ext'
+require_relative 'fs'
 
 Quick::Main = self
 
@@ -7,10 +9,38 @@ module Quick
 	module Service
 		module_function
 
-		def start
-			raise "already running" if @running
-			raise NotImplementedError
-			@running = true
+		# warning: run/stop/hibernate are pretty awful because I
+		# don't actually know how to use EventMachine properly.
+		# If you know how to make these better, PLEASE feel free
+		# to submit a pull request!
+		def run(mount_point)
+			while true
+				raise "already running" if @running
+				@mount_point = FS::FSRoot.contents = mount_point
+				@root = FS::ModuleDir.new Object
+				Thread.new do
+					FuseFS.start @root, mount_point
+				end
+				EM.run do
+					Main.remote_pry_em
+					BrB::Service.start_service object: self
+					@running = true
+				end
+				if @hibernating
+					sleep 10
+					@hibernating = false
+				else
+					break
+				end
+			end
+		end
+
+		def stop
+			raise "not running" unless @running
+			FuseFS.exit
+			BrB::Service.stop_service
+			EM.stop
+			@running = false
 		end
 
 		def eval(module_path, code, instance=true)
@@ -33,16 +63,8 @@ module Quick
 		end
 
 		def hibernate
-			halt
-			yield
-			sleep 10
-			start
-		end
-
-		private
-
-		def halt
-			raise NotImplementedError
+			@hibernating = true
+			stop
 		end
 
 		def resolve_path(path)

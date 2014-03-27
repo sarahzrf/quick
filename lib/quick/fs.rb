@@ -20,8 +20,6 @@ module Quick
 		end
 
 		class FSConstant
-			include Singleton
-
 			attr_writer :contents
 
 			define file?: true, can_read?: true, times: [Time.now] * 3
@@ -43,9 +41,9 @@ module Quick
 			end
 		end
 
-		BrBURI = Class.new FSConstant
+		BrBURI = FSConstant.new
 		BrBURI.contents = proc {BrB::Service.uri}
-		FSRoot = Class.new FSConstant
+		FSRoot = FSConstant.new
 
 		class ROCodeFile
 			define file?: true, can_read?: true, can_write?: false
@@ -189,9 +187,9 @@ module Quick
 				when '._rfuse_check_'
 					RFuseCheck.instance
 				when '#brb_uri'
-					BrBURI.instance
+					BrBURI
 				when '#fs_root'
-					FSRoot.instance
+					FSRoot
 				when '#singleton_class'
 					self.class.new @mod.singleton_class
 				else
