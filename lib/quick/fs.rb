@@ -43,7 +43,6 @@ module Quick
 
 		BrBURI = FSConstant.new
 		BrBURI.contents = proc {BrB::Service.uri}
-		FSRoot = FSConstant.new
 
 		class ROCodeFile
 			define file?: true, can_read?: true, can_write?: false
@@ -192,8 +191,6 @@ module Quick
 					RFuseCheck.instance
 				when '#brb_uri'
 					BrBURI
-				when '#fs_root'
-					FSRoot
 				when '#singleton_class'
 					self.class.new @mod.singleton_class
 				else
