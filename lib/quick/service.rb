@@ -102,7 +102,7 @@ module Quick
 		end
 
 		def resolve_path(path)
-			path = path.sub /\A\//, ''
+			path = path.sub /\A(\/|\.|\.\.)/, ''
 			parts = path.split '/'
 			parts.inject(Object) {|mod, name| mod.const_get name}
 		end

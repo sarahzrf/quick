@@ -1,0 +1,70 @@
+#!/usr/bin/env ruby
+require 'thor'
+require 'brb'
+require 'pathname'
+require 'pry-remote-em/client'
+require 'uri'
+require_relative '../lib/quick'
+
+def brb_service
+	uri = File.read('#brb_uri')
+	service = BrB::Tunnel.create nil, uri
+	if service.error?
+		puts "failed to connect to the Quick instance"
+		exit 2
+	end
+	service
+rescue Errno::ENOENT
+	puts "not in a Quick directory"
+	exit 1
+end
+
+class QuickCLI < Thor
+	desc "start MOUNT_DIR", "run Quick, mounting the FS on MOUNT_DIR"
+	option :foreground, type: :boolean, aliases: :f
+	def start(dir)
+		if File.file? dir or
+			(File.directory? dir and Dir.entries(dir).size > 2)
+			puts "cannot mount on #{dir}"
+			exit 1
+		elsif not File.directory? dir
+			existed = false
+			Dir.mkdir dir
+		else
+			existed = true
+		end
+		unless options.foreground?
+			if (pid = fork)
+				Process.detach pid
+				exit
+			end
+		end
+		Quick::Service.run dir
+		Dir.rmdir dir unless existed
+	end
+
+	desc "stop", "stop the Quick instance that owns your CWD"
+	def stop
+		brb_service.stop
+		sleep 0.1
+	end
+
+	desc "pry", "start a pry in the module corresponding to your CWD"
+	option :module, type: :boolean, aliases: :m
+	def pry
+		service = brb_service
+		root = Pathname.new service.mount_point_block
+		path = Pathname.pwd.relative_path_from root
+		uri = service.pry_at_block(path.to_path, !options.module?)
+		system "pry-remote-em #{uri}"
+		exit
+		EM.run do
+			PryRemoteEm::Client.start(uri.host, uri.port) {|e| EM.stop}
+		end
+	end
+end
+
+QuickCLI.start
+
+# vim:tabstop=2 shiftwidth=2 noexpandtab:
+
