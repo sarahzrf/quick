@@ -3,7 +3,17 @@ require 'brb'
 require_relative 'core_ext'
 require_relative 'fs'
 
-Quick::Main = self
+# ugly hacks ahoy!
+
+module PryRemoteEm::Server
+	alias_method :old_unbind, :unbind
+
+	def unbind
+		old_unbind
+		url = Quick::Service.pries.delete @obj
+		PryRemoteEm.stop_server url
+	end
+end
 
 module Quick
 	module Service
@@ -14,15 +24,14 @@ module Quick
 		# If you know how to make these better, PLEASE feel free
 		# to submit a pull request!
 		def run(mount_point)
-			while true
+			loop do
 				raise "already running" if @running
-				@mount_point = FS::FSRoot.contents = mount_point
+				@mount_point = File.absolute_path mount_point
 				@root = FS::ModuleDir.new Object
 				Thread.new do
-					FuseFS.start @root, mount_point
+					FuseFS.start @root, @mount_point
 				end
 				EM.run do
-					Main.remote_pry_em
 					BrB::Service.start_service object: self
 					@running = true
 				end
@@ -33,14 +42,22 @@ module Quick
 					break
 				end
 			end
+		ensure
+			FuseFS.unmount
 		end
 
 		def stop
 			raise "not running" unless @running
+			@running = false
+			FuseFS.unmount
 			FuseFS.exit
 			BrB::Service.stop_service
 			EM.stop
-			@running = false
+		end
+
+		def hibernate
+			@hibernating = true
+			stop
 		end
 
 		def eval(module_path, code, instance=true)
@@ -62,9 +79,26 @@ module Quick
 			end
 		end
 
-		def hibernate
-			@hibernating = true
-			stop
+		def pries
+			@pries ||= {}
+		end
+
+		def pry_at(module_path, instance=true)
+			mod = resolve_path module_path
+			target = if instance
+				mod.quick_instance.quick_binding
+			else
+				mod.quick_binding
+			end
+			if pries.key? target
+				pries[target]
+			else
+				pries[target] = target.remote_pry_em 'localhost', :auto
+			end
+		end
+
+		def mount_point
+			@mount_point
 		end
 
 		def resolve_path(path)
