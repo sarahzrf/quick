@@ -61,12 +61,8 @@ class QuickCLI < Thor
 	desc 'eval CODE', "evaluate some code in an instance of the current module"
 	option :module, type: :boolean, aliases: :m
 	def eval(code)
-		success, result = Quick.eval_here code, !options.module?
-		if success
-			puts "=> #{result}"
-		else
-			puts "error: #{result}"
-		end
+		result = Quick.eval_here code, !options.module?
+		puts "=> #{result}"
 	end
 end
 

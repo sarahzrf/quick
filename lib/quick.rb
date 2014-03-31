@@ -5,7 +5,7 @@ require_relative 'quick/service'
 module Quick
 	extend self
 
-	VERSION = '0.2.1'
+	VERSION = '0.2.2'
 
 	def brb_service
 		@brb_service ||=
@@ -35,18 +35,26 @@ module Quick
 	end
 
 	def eval_here(code, instance=true)
-		brb_service.eval_block pwd_from_root, code, instance
+		success, result = brb_service.eval_block pwd_from_root, code, instance
+		if success
+			result
+		else
+			raise result
+		end
 	end
 
 	def module_here(name)
-		raise "invalid module name" unless ('A'..'Z').include? name[0]
+		const_defined? name
 		brb_service.new_mod_block pwd_from_root, name
+	rescue NameError
+		raise "invalid module name"
 	end
 
 	def class_here(name, super_path='Object')
-		raise "invalid class name" unless ('A'..'Z').include? name[0]
-		p [pwd_from_root, name, from_root(super_path)]
+		const_defined? name
 		brb_service.new_mod_block pwd_from_root, name, from_root(super_path)
+	rescue NameError
+		raise "invalid class name"
 	end
 
 	def pwd_from_root
