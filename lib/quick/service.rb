@@ -17,7 +17,7 @@ end
 
 module Quick
 	module Service
-		module_function
+		extend self
 
 		# warning: run/stop/hibernate are pretty awful because I
 		# don't actually know how to use EventMachine properly.
@@ -63,10 +63,12 @@ module Quick
 		def eval(module_path, code, instance=true)
 			mod = resolve_path module_path
 			if instance
-				mod.quick_instance.quick_binding.eval code
+				[true, mod.quick_instance.quick_binding.eval(code).inspect]
 			else
-				mod.quick_binding.eval code
+				[true, mod.quick_binding.eval(code).inspect]
 			end
+		rescue => e
+			[false, e.message]
 		end
 
 		def new_mod(parent_path, name, super_path=nil)
@@ -77,6 +79,7 @@ module Quick
 				superclass = resolve_path super_path
 				parent.const_set name, Class.new(superclass)
 			end
+			name
 		end
 
 		def pries

@@ -2,25 +2,17 @@
 require 'thor'
 require 'brb'
 require 'pathname'
-require 'pry-remote-em/client'
 require 'uri'
 require_relative '../lib/quick'
 
-def brb_service
-	uri = File.read('#brb_uri')
-	service = BrB::Tunnel.create nil, uri
-	if service.error?
-		puts "failed to connect to the Quick instance"
-		exit 2
-	end
-	service
-rescue Errno::ENOENT
-	puts "not in a Quick directory"
-	exit 1
-end
-
 class QuickCLI < Thor
-	desc "start MOUNT_DIR", "run Quick, mounting the FS on MOUNT_DIR"
+	map '-v' => :version
+	desc 'version', "print your version of Quick"
+	def version
+		puts Quick::VERSION
+	end
+
+	desc 'start MOUNT_DIR', "run Quick, mounting the FS on MOUNT_DIR"
 	option :foreground, type: :boolean, aliases: :f
 	def start(dir)
 		if File.file? dir or
@@ -39,32 +31,51 @@ class QuickCLI < Thor
 				exit
 			end
 		end
-		Quick::Service.run dir
+		Quick.run dir
 		Dir.rmdir dir unless existed
 	end
 
-	desc "stop", "stop the Quick instance that owns your CWD"
+	desc 'stop', "stop your current Quick instance"
 	def stop
-		brb_service.stop
-		sleep 0.1
+		Quick.stop
 	end
 
-	desc "pry", "start a pry in the module corresponding to your CWD"
+	desc 'pry', "start a pry in an instance of the current module"
 	option :module, type: :boolean, aliases: :m
 	def pry
-		service = brb_service
-		root = Pathname.new service.mount_point_block
-		path = Pathname.pwd.relative_path_from root
-		uri = service.pry_at_block(path.to_path, !options.module?)
+		uri = Quick.pry_here !options.module?
 		system "pry-remote-em #{uri}"
-		exit
-		EM.run do
-			PryRemoteEm::Client.start(uri.host, uri.port) {|e| EM.stop}
+	end
+
+	desc 'module NAME', "create a new module here"
+	def module(name)
+		Quick.module_here name
+	end
+
+	map 'class' => :class_
+	desc 'class NAME [SUPERCLASS_PATH]', "create a new class here"
+	def class_(name, super_path='Object')
+		Quick.class_here name, super_path
+	end
+
+	desc 'eval CODE', "evaluate some code in an instance of the current module"
+	option :module, type: :boolean, aliases: :m
+	def eval(code)
+		success, result = Quick.eval_here code, !options.module?
+		if success
+			puts "=> #{result}"
+		else
+			puts "error: #{result}"
 		end
 	end
 end
 
-QuickCLI.start
+begin
+	QuickCLI.start
+rescue RuntimeError => e
+	puts e.message
+	exit 1
+end
 
 # vim:tabstop=2 shiftwidth=2 noexpandtab:
 

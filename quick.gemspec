@@ -1,8 +1,10 @@
+require './lib/quick'
+
 Gem::Specification.new do |s|
   s.name        = 'quick'
-  s.version     = '0.1'
+  s.version     = Quick::VERSION
   s.date        = Date.today.to_s
-  s.summary     = 'A Smalltalk-ish live dev environment for Ruby.'
+  s.summary     = 'Code in a living environment!'
   s.description = 'A Smalltalk-ish live dev environment for Ruby.'
   s.authors     = ['benzrf']
   s.email       = 'benzrf@benzrf.com'
