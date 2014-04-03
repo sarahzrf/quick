@@ -1,0 +1,481 @@
+Script started on Thu 03 Apr 2014 10:51:19 AM EDT
+[?1049h[r[m[2J[H[?7h[?1;4;6l[4l[?1h=[0m(B[1;33r[H[2J[H[2Jbenzrf@benzrf-laptop:~/quick_example$ ls -a
+[1m[34m.[0m  [1m[34m..[0m  timing  typescript
+benzrf@benzrf-laptop:~/quick_example$ # just the recording files atm.
+benzrf@benzrf-laptop:~/quick_example$  [Kquick start quick_fuse_fs --foreground
+fusermount: failed to open /etc/fuse.conf: Permission denied
+/var/lib/gems/1.9.1/gems/quick-0.2.2/lib/quick/fs.rb:225: Use RbConfig instead of obsolete and deprecated Config.
+[H[2Jbenzrf@benzrf-laptop:~/quick_example$ ls -a
+[1m[34m.[0m  [1m[34m..[0m  [34m[42mquick_fuse_fs[39m[49m  timing  typescript
+benzrf@benzrf-laptop:~/quick_example$ # now we have a fuse FS!
+benzrf@benzrf-laptop:~/quick_example$ cd quick_fuse_fs/
+benzrf@benzrf-laptop:~/quick_example/quick_fuse_fs$ ls
+[34m[42mAddrinfo[39m[49m                                [34m[42mFalseClass[39m[49m        [34m[42mMonitorMixin[39m[49m         [34m[42mRFuse[39m[49m              [34m[42mStopIteration[39m[49m
+[34m[42mArgumentError[39m[49m                           [34m[42mFcntl[39m[49m             [34m[42mMutex[39m[49m                [34m[42mRFuseFS[39m[49m            [34m[42mString[39m[49m
+[34m[42mArray[39m[49m                                   [34m[42mFiber[39m[49m             [34m[42mNameError[39m[49m            [34m[42mRPStringScanner[39m[49m    [34m[42mStringIO[39m[49m
+[34m[42mBasicObject[39m[49m                             [34m[42mFiberError[39m[49m        [34m[42mNilClass[39m[49m             [34m[42mRuby18Parser[39m[49m       [34m[42mStringScanner[39m[49m
+[34m[42mBasicSocket[39m[49m                             [34m[42mFile[39m[49m              [34m[42mNoMemoryError[39m[49m        [34m[42mRuby19Parser[39m[49m       [34m[42mStruct[39m[49m
+[34m[42mBignum[39m[49m                                  [34m[42mFileTest[39m[49m          [34m[42mNoMethodError[39m[49m        [34m[42mRuby20Parser[39m[49m       [34m[42mSyck[39m[49m
+[34m[42mBinding[39m[49m                                 [34m[42mFileUtils[39m[49m         [34m[42mNotImplementedError[39m[49m  [34m[42mRuby21Parser[39m[49m       [34m[42mSymbol[39m[49m
+[34m[42mBrB[39m[49m                                     [34m[42mFixnum[39m[49m            [34m[42mNumeric[39m[49m              [34m[42mRubyLex[39m[49m            [34m[42mSyntaxError[39m[49m
+[34m[42mBrBCallbackWithBlockingMethodException[39m[49m  [34m[42mFloat[39m[49m             [34m[42mObject[39m[49m               [34m[42mRubyLexer[39m[49m          [34m[42mSystemCallError[39m[49m
+[34m[42mBrBException[39m[49m                            [34m[42mFloatDomainError[39m[49m  [34m[42mObjectSpace[39m[49m          [34m[42mRubyParser[39m[49m         [34m[42mSystemExit[39m[49m
+[34m[42mBufferedTokenizer[39m[49m                       [34m[42mForwardable[39m[49m       [34m[42mOpenSSL[39m[49m              [34m[42mRubyParserStuff[39m[49m    [34m[42mSystemStackError[39m[49m
+[34m[42mClass[39m[49m                                   [34m[42mFuseFS[39m[49m            [34m[42mOpenStruct[39m[49m           [34m[42mRubyToken[39m[49m          [34m[42mTCPServer[39m[49m
+[34m[42mCodeRay[39m[49m                                 [34m[42mGC[39m[49m                [34m[42mParseError[39m[49m           [34m[42mRubyVM[39m[49m             [34m[42mTCPSocket[39m[49m
+[34m[42mColumnize[39m[49m                               [34m[42mGem[39m[49m               [34m[42mPathname[39m[49m             [34m[42mRuntimeError[39m[49m       [34m[42mTempfile[39m[49m
+[34m[42mComparable[39m[49m                              [34m[42mHash[39m[49m              [34m[42mPP[39m[49m                   [34m[42mScanError[39m[49m          [34m[42mThor[39m[49m
+[34m[42mComplex[39m[49m                                 [34m[42mIndexError[39m[49m        [34m[42mPrettyPrint[39m[49m          [34m[42mScriptError[39m[49m        [34m[42mThread[39m[49m
+[34m[42mConditionVariable[39m[49m                       [34m[42mInteger[39m[49m           [34m[42mPrinters[39m[49m             [34m[42mSecureRandom[39m[49m       [34m[42mThreadError[39m[49m
+[34m[42mConfig[39m[49m                                  [34m[42mInterrupt[39m[49m         [34m[42mProc[39m[49m                 [34m[42mSecurityError[39m[49m      [34m[42mThreadGroup[39m[49m
+[34m[42mData[39m[49m                                    [34m[42mIO[39m[49m                [34m[42mProcess[39m[49m              [34m[42mSet[39m[49m                [34m[42mTime[39m[49m
+[34m[42mDate[39m[49m                                    [34m[42mIOError[39m[49m           [34m[42mPry[39m[49m                  [34m[42mSexp[39m[49m               [34m[42mTimeout[39m[49m
+[34m[42mDateTime[39m[49m                                [34m[42mIPSocket[39m[49m          [34m[42mPryDebugger[39m[49m          [34m[42mSexpAny[39m[49m            [34m[42mTimeoutError[39m[49m
+[34m[42mDebugger[39m[49m                                [34m[42mIRB[39m[49m               [34m[42mPryRemoteEm[39m[49m          [34m[42mSexpMatchSpecial[39m[49m   [34m[42mTraceLineNumbers[39m[49m
+[34m[42mDelegator[39m[49m                               [34m[42mJSON[39m[49m              [34m[42mPsych[39m[49m                [34m[42mSexpMatchSpecials[39m[49m  [34m[42mTrueClass[39m[49m
+[34m[42mDigest[39m[49m                                  [34m[42mKernel[39m[49m            [34m[42mQueue[39m[49m                [34m[42mShellwords[39m[49m         [34m[42mTypeError[39m[49m
+[34m[42mDir[39m[49m                                     [34m[42mKeyError[39m[49m          [34m[42mQuick[39m[49m                [34m[42mSignal[39m[49m             [34m[42mUDPSocket[39m[49m
+[34m[42mEM[39m[49m                                      [34m[42mLineCache[39m[49m         [34m[42mQuickCLI[39m[49m             [34m[42mSignalException[39m[49m    [34m[42mUnboundMethod[39m[49m
+[34m[42mEncoding[39m[49m                                [34m[42mLoadError[39m[49m         [34m[42mRacc[39m[49m                 [34m[42mSimpleDelegator[39m[49m    [34m[42mUNIXServer[39m[49m
+[34m[42mEncodingError[39m[49m                           [34m[42mLocalJumpError[39m[49m    [34m[42mRandom[39m[49m               [34m[42mSingleForwardable[39m[49m  [34m[42mUNIXSocket[39m[49m
+[34m[42mEnumerable[39m[49m                              [34m[42mLogger[39m[49m            [34m[42mRange[39m[49m                [34m[42mSingleton[39m[49m          [34m[42mURI[39m[49m
+[34m[42mEnumerator[39m[49m                              [34m[42mMarshal[39m[49m           [34m[42mRangeError[39m[49m           [34m[42m#singleton_class[39m[49m   [34m[42mYAML[39m[49m
+[34m[42mEOFError[39m[49m                                [34m[42mMatchData[39m[49m         [34m[42mRational[39m[49m             [34m[42mSizedQueue[39m[49m         [34m[42mZeroDivisionError[39m[49m
+[34m[42mErrno[39m[49m                                   [34m[42mMath[39m[49m              [34m[42mRbConfig[39m[49m             [34m[42mSlop[39m[49m               [34m[42mZlib[39m[49m
+[34m[42mEtc[39m[49m                                     [34m[42mMethod[39m[49m            [34m[42mReadline[39m[49m             [34m[42mSocket[39m[49m
+[34m[42mEventMachine[39m[49m                            [34m[42mMethodSource[39m[49m      [34m[42mRegexp[39m[49m               [34m[42mSocketError[39m[49m
+[34m[42mException[39m[49m                               [34m[42mModule[39m[49m            [34m[42mRegexpError[39m[49m          [34m[42mSortedSet[39m[49m
+[34m[42mException2MessageMapper[39m[49m                 [34m[42mMonitor[39m[49m           [34m[42mResolv[39m[49m               [34m[42mStandardError[39m[49m
+benzrf@benzrf-laptop:~/quick_example/quick_fuse_fs$ ls --color=no
+Addrinfo                                FalseClass        MonitorMixin         RFuse              StopIteration
+ArgumentError                           Fcntl             Mutex                RFuseFS            String
+Array                                   Fiber             NameError            RPStringScanner    StringIO
+BasicObject                             FiberError        NilClass             Ruby18Parser       StringScanner
+BasicSocket                             File              NoMemoryError        Ruby19Parser       Struct
+Bignum                                  FileTest          NoMethodError        Ruby20Parser       Syck
+Binding                                 FileUtils         NotImplementedError  Ruby21Parser       Symbol
+BrB                                     Fixnum            Numeric              RubyLex            SyntaxError
+BrBCallbackWithBlockingMethodException  Float             Object               RubyLexer          SystemCallError
+BrBException                            FloatDomainError  ObjectSpace          RubyParser         SystemExit
+BufferedTokenizer                       Forwardable       OpenSSL              RubyParserStuff    SystemStackError
+Class                                   FuseFS            OpenStruct           RubyToken          TCPServer
+CodeRay                                 GC                ParseError           RubyVM             TCPSocket
+Columnize                               Gem               Pathname             RuntimeError       Tempfile
+Comparable                              Hash              PP                   ScanError          Thor
+Complex                                 IndexError        PrettyPrint          ScriptError        Thread
+ConditionVariable                       Integer           Printers             SecureRandom       ThreadError
+Config                                  Interrupt         Proc                 SecurityError      ThreadGroup
+Data                                    IO                Process              Set                Time
+Date                                    IOError           Pry                  Sexp               Timeout
+DateTime                                IPSocket          PryDebugger          SexpAny            TimeoutError
+Debugger                                IRB               PryRemoteEm          SexpMatchSpecial   TraceLineNumbers
+Delegator                               JSON              Psych                SexpMatchSpecials  TrueClass
+Digest                                  Kernel            Queue                Shellwords         TypeError
+Dir                                     KeyError          Quick                Signal             UDPSocket
+EM                                      LineCache         QuickCLI             SignalException    UnboundMethod
+Encoding                                LoadError         Racc                 SimpleDelegator    UNIXServer
+EncodingError                           LocalJumpError    Random               SingleForwardable  UNIXSocket
+Enumerable                              Logger            Range                Singleton          URI
+Enumerator                              Marshal           RangeError           #singleton_class   YAML
+EOFError                                MatchData         Rational             SizedQueue         ZeroDivisionError
+Errno                                   Math              RbConfig             Slop               Zlib
+Etc                                     Method            Readline             Socket
+EventMachine                            MethodSource      Regexp               SocketError
+Exception                               Module            RegexpError          SortedSet
+Exception2MessageMapper                 Monitor           Resolv               StandardError
+benzrf@benzrf-laptop:~/quick_example/quick_fuse_fs$ # these are all of the constants in Object that are modules ar[K[Kor classes
+benzrf@benzrf-laptop:~/quick_example/quick_fuse_fs$ # let's make a new one.
+benzrf@benzrf-laptop:~/quick_example/quick_fuse_fs$ quick lc[K[Kclass Foo
+benzrf@benzrf-laptop:~/quick_example/quick_fuse_fs$ cd Foo
+benzrf@benzrf-laptop:~/quick_example/quick_fuse_fs/Foo$ ls -a
+[34m[42m.[39m[49m  [34m[42m..[39m[49m  [34m[42m#singleton_class[39m[49m
+benzrf@benzrf-laptop:~/quick_example/quick_fuse_fs/Foo$ # sfd[Knothing in particular here yet!
+benzrf@benzrf-laptop:~/quick_example/quick_fuse_fs/Foo$ # let's make a new source fo[Kile.
+benzrf@benzrf-laptop:~/quick_example/quick_fuse_fs/Foo$ vim some_methods.rb
+[H[?12;25h[?12l[?25h[H[2J[?25l[32B"some_methods.rb" 0L, 0C[H[34m[40m   1 [39m[49m
+[1m[34m~                                                                                                                           
+~                                                                                                                           
+~                                                                                                                           
+~                                                                                                                           
+~                                                                                                                           
+~                                                                                                                           
+~                                                                                                                           
+~                                                                                                                           
+~                                                                                                                           
+~                                                                                                                           
+~                                                                                                                           
+~                                                                                                                           
+~                                                                                                                           
+~                                                                                                                           
+~                                                                                                                           
+~                                                                                                                           
+~                                                                                                                           
+~                                                                                                                           
+~                                                                                                                           
+~                                                                                                                           
+~                                                                                                                           
+~                                                                                                                           
+~                                                                                                                           
+~                                                                                                                           
+~                                                                                                                           
+~                                                                                                                           
+~                                                                                                                           
+~                                                                                                                           
+~                                                                                                                           
+~                                                                                                                           [0m
+[1m[7msome_methods.rb [utf-8, unix] [ruby]                                                                             0, 0/1 All [1;6H[?12l[?25h[?25l[0m[32B[1m-- INSERT --[0m[K[2;1H[34m[40m   2 [39m[49m[K[32;32H[1m[7m+][ruby][74C1, 1/2[1;6H[?12l[?25h[?25l[0md[32;114H[1m[7m2[1;7H[?12l[?25h[?25l[0me[32;114H[1m[7m3[1;8H[?12l[?25h[?25l[0m[35mdef[39m[32;114H[1m[7m4[1;9H[?12l[?25h[?25l[32;114H5[1;10H[?12l[?25h[?25l[0m[36mf[39m[32;114H[1m[7m6[1;11H[?12l[?25h[?25l[0m[36mo[39m[32;114H[1m[7m7[1;12H[?12l[?25h[?25l[0m[36mo[39m[32;114H[1m[7m8[1;13H[?12l[?25h[?25l[0m([32;114H[1m[7m9[1;14H[?12l[?25h[?25l[0ma[32;113H[1m[7m10[1;15H[?12l[?25h[?25l[0m,[32;114H[1m[7m1[1;16H[?12l[?25h[?25l[32;114H2[1;17H[?12l[?25h[?25l[0mb[32;114H[1m[7m3[1;18H[?12l[?25h[?25l[0m)[46m([49ma, b[46m)[49m[32;114H[1m[7m4[1;19H[?12l[?25h[?25l[0m
+
+[34m[40m   3 [39m[49m[K[1;13H(a, b)[32;113H[1m[7m 2, 2/3[2;14H[?12l[?25h[?25l[32;114H1[2;6H[?12l[?25h[?25l[32;114H2[2;7H[?12l[?25h[?25l[32;114H3[2;8H[?12l[?25h[?25l[0mc[32;114H[1m[7m4[2;9H[?12l[?25h[?25l[32;114H5[2;10H[?12l[?25h[?25l[0m+[32;114H[1m[7m6[2;11H[?12l[?25h[?25l[32;114H7[2;12H[?12l[?25h[?25l[32;114H6[2;11H[?12l[?25h[?25l[0m[K[32;114H[1m[7m5[2;10H[?12l[?25h[?25l[0m=[32;114H[1m[7m6[2;11H[?12l[?25h[?25l[32;114H7[2;12H[?12l[?25h[?25l[0ma[32;114H[1m[7m8[2;13H[?12l[?25h[?25l[32;114H9[2;14H[?12l[?25h[?25l[0m+[32;113H[1m[7m10[2;15H[?12l[?25h[?25l[32;114H1[2;16H[?12l[?25h[?25l[0mb[32;114H[1m[7m2[2;17H[?12l[?25h[?25l[0m
+
+[34m[40m   4 [39m[49m[K[32;113H[1m[7m 3, 3/4[3;8H[?12l[?25h[?25l[0ma[32;114H[1m[7m4[3;9H[?12l[?25h[?25l[32;114H5[3;10H[?12l[?25h[?25l[0m+[32;114H[1m[7m6[3;11H[?12l[?25h[?25l[0m[K[32;114H[1m[7m5[3;10H[?12l[?25h[?25l[0m*[32;114H[1m[7m6[3;11H[?12l[?25h[?25l[32;114H7[3;12H[?12l[?25h[?25l[0mb[32;114H[1m[7m8[3;13H[?12l[?25h[?25l[32;114H9[3;14H[?12l[?25h[?25l[0m+[32;113H[1m[7m10[3;15H[?12l[?25h[?25l[32;114H1[3;16H[?12l[?25h[?25l[0mc[32;114H[1m[7m2[3;17H[?12l[?25h[?25l[0m
+
+[34m[40m   5 [39m[49m[K[32;113H[1m[7m 3, 4/5[4;8H[?12l[?25h[?25l[0me[32;114H[1m[7m4[4;9H[?12l[?25h[?25l[0mn[32;114H[1m[7m5[4;10H[?12l[?25h[?25l[0m[35mend[39m[K[32;114H[1m[7m4[4;9H[?12l[?25h[?25l[0m
+
+[34m[40m   6 [39m[49m[K[32;114H[1m[7m1, 5/6[5;6H[?12l[?25h[?25l[0m
+
+[34m[40m   7 [39m[49m[K[32;117H[1m[7m6/7[6;6H[?12l[?25h[?25l[0md[32;114H[1m[7m2[6;7H[?12l[?25h[?25l[0me[32;114H[1m[7m3[6;8H[?12l[?25h[?25l[0m[35mdef[39m[32;114H[1m[7m4[6;9H[?12l[?25h[?25l[32;114H5[6;10H[?12l[?25h[?25l[0m[36mb[39m[32;114H[1m[7m6[6;11H[?12l[?25h[?25l[0m[36ma[39m[32;114H[1m[7m7[6;12H[?12l[?25h[?25l[0m[36mr[39m[32;114H[1m[7m8[6;13H[?12l[?25h[?25l[0m([32;114H[1m[7m9[6;14H[?12l[?25h[?25l[0mz[32;113H[1m[7m10[6;15H[?12l[?25h[?25l[0m)[46m([49mz[46m)[49m[32;114H[1m[7m1[6;16H[?12l[?25h[?25l[0m
+
+[34m[40m   8 [39m[49m[K[6;13H(z)[32;113H[1m[7m 2, 7/8[7;14H[?12l[?25h[?25l[32;114H1[7;6H[?12l[?25h[?25l[32;114H2[7;7H[?12l[?25h[?25l[32;114H3[7;8H[?12l[?25h[?25l[0mz[32;114H[1m[7m4[7;9H[?12l[?25h[?25l[32;114H5[7;10H[?12l[?25h[?25l[0m-[32;114H[1m[7m6[7;11H[?12l[?25h[?25l[32;114H7[7;12H[?12l[?25h[?25l[32;114H6[7;11H[?12l[?25h[?25l[32;114H7[7;12H[?12l[?25h[?25l[0m[31m1[39m[32;114H[1m[7m8[7;13H[?12l[?25h[?25l[0m[31m0[39m[32;114H[1m[7m9[7;14H[?12l[?25h[?25l[0m[31m0[39m[32;113H[1m[7m10[7;15H[?12l[?25h[?25l[0m
+
+[34m[40m   9 [39m[49m[K[32;113H[1m[7m 3, 8/9[8;8H[?12l[?25h[?25l[0me[32;114H[1m[7m4[8;9H[?12l[?25h[?25l[0mn[32;114H[1m[7m5[8;10H[?12l[?25h[?25l[0m[35mend[39m[K[32;114H[1m[7m4[8;9H[?12l[?25h[0m[25B[K[8;8H[?25l[32;114H[1m[7m3[8;8H[?12l[?25h[?25l[25B[0m:[?12l[?25hW[?25l[?12l[?25h[?25l"some_methods.rb" 9L, 69C written[A[1m[7mruby]   [8;8H[?12l[?25h[32;117H7[7;8H[32;114H2[7;7H[32;114H1[7;6H[32;117H8[8;6H[?25l[0m[25B[1m-- INSERT --[0m[K[23A[34m[40m  10 [39m[49m[K[32;32H[1m[7m+][ruby][73C1, 9/10[9;6H[?12l[?25h[?25l[0m
+
+[34m[40m  11 [39m[49m[K[32;112H[1m[7m1, 10/11[10;6H[?12l[?25h[?25l[0md[32;112H[1m[7m2[10;7H[?12l[?25h[?25l[0me[32;112H[1m[7m3[10;8H[?12l[?25h[?25l[0m[35mdef[39m[32;112H[1m[7m4[10;9H[?12l[?25h[?25l[32;112H5[10;10H[?12l[?25h[?25l[0m[36mm[39m[32;112H[1m[7m6[10;11H[?12l[?25h[?25l[0m[36mu[39m[32;112H[1m[7m7[10;12H[?12l[?25h[?25l[0m[36mt[39m[32;112H[1m[7m8[10;13H[?12l[?25h[?25l[0m[36ma[39m[32;112H[1m[7m9[10;14H[?12l[?25h[?25l[0m[36mt[39m[32;111H[1m[7m10[10;15H[?12l[?25h[?25l[0m[36mo[39m[32;112H[1m[7m1[10;16H[?12l[?25h[?25l[0m[36mr[39m[32;112H[1m[7m2[10;17H[?12l[?25h[?25l[0m([32;112H[1m[7m3[10;18H[?12l[?25h[?25l[32;112H4[10;22H[?12l[?25h[?25l[32;112H3[10;18H[?12l[?25h[?25l[0mn[32;112H[1m[7m4[10;19H[?12l[?25h[?25l[0m[K[32;112H[1m[7m3[10;18H[?12l[?25h[?25l[0mv[32;112H[1m[7m4[10;19H[?12l[?25h[?25l[0m)[46m([49mv[46m)[49m[32;112H[1m[7m5[10;20H[?12l[?25h[?25l[0m
+
+[34m[40m  12 [39m[49m[K[10;17H(v)[32;111H[1m[7m 2, 11/12[11;14H[?12l[?25h[?25l[32;112H1[11;6H[?12l[?25h[?25l[32;112H2[11;7H[?12l[?25h[?25l[32;112H3[11;8H[?12l[?25h[?25l[0m@[32;112H[1m[7m4[11;9H[?12l[?25h[?25l[0m[36m@f[39m[32;112H[1m[7m5[11;10H[?12l[?25h[?25l[0m[36mo[39m[32;112H[1m[7m6[11;11H[?12l[?25h[?25l[0m[36mo[39m[32;112H[1m[7m7[11;12H[?12l[?25h[?25l[32;112H8[11;13H[?12l[?25h[?25l[0m=[32;112H[1m[7m9[11;14H[?12l[?25h[?25l[32;111H10[11;15H[?12l[?25h[?25l[0mv[32;112H[1m[7m1[11;16H[?12l[?25h[?25l[0m
+
+[34m[40m  13 [39m[49m[K[32;111H[1m[7m 3, 12/13[12;8H[?12l[?25h[?25l[0me[32;112H[1m[7m4[12;9H[?12l[?25h[?25l[0mn[32;112H[1m[7m5[12;10H[?12l[?25h[?25l[0m[35mend[39m[K[32;112H[1m[7m4[12;9H[?12l[?25h[?25l[0m
+
+[34m[40m  14 [39m[49m[K[32;112H[1m[7m1, 13/14[13;6H[?12l[?25h[?25l[0m
+
+[34m[40m  15 [39m[49m[K[32;116H[1m[7m4/15[14;6H[?12l[?25h[?25l[0md[32;112H[1m[7m2[14;7H[?12l[?25h[?25l[0me[32;112H[1m[7m3[14;8H[?12l[?25h[?25l[0m[35mdef[39m[32;112H[1m[7m4[14;9H[?12l[?25h[?25l[32;112H5[14;10H[?12l[?25h[?25l[0m[36mg[39m[32;112H[1m[7m6[14;11H[?12l[?25h[?25l[0m[36me[39m[32;112H[1m[7m7[14;12H[?12l[?25h[?25l[0m[36mt[39m[32;112H[1m[7m8[14;13H[?12l[?25h[?25l[0m[36mf[39m[32;112H[1m[7m9[14;14H[?12l[?25h[?25l[0m[36mo[39m[32;111H[1m[7m10[14;15H[?12l[?25h[?25l[0m[36mo[39m[32;112H[1m[7m1[14;16H[?12l[?25h[?25l[0m([32;112H[1m[7m2[14;17H[?12l[?25h[?25l[0mv[32;112H[1m[7m3[14;18H[?12l[?25h[?25l[0m)[46m([49mv[46m)[49m[32;112H[1m[7m4[14;19H[?12l[?25h[?25l[0m[K([32;112H[1m[7m3[14;18H[?12l[?25h[?25l[0m[K[32;112H[1m[7m2[14;17H[?12l[?25h[?25l[0m[K[32;112H[1m[7m1[14;16H[?12l[?25h[?25l[0m
+
+[34m[40m  16 [39m[49m[K[32;111H[1m[7m 2, 15/16[15;14H[?12l[?25h[?25l[32;112H1[15;6H[?12l[?25h[?25l[32;112H2[15;7H[?12l[?25h[?25l[32;112H3[15;8H[?12l[?25h[?25l[0m@[32;112H[1m[7m4[15;9H[?12l[?25h[?25l[0m[36m@f[39m[32;112H[1m[7m5[15;10H[?12l[?25h[?25l[0m[36mo[39m[32;112H[1m[7m6[15;11H[?12l[?25h[?25l[0m[36mo[39m[32;112H[1m[7m7[15;12H[?12l[?25h[?25l[0m
+
+[34m[40m  17 [39m[49m[K[32;112H[1m[7m3, 16/17[16;8H[?12l[?25h[?25l[0me[32;112H[1m[7m4[16;9H[?12l[?25h[?25l[0mn[32;112H[1m[7m5[16;10H[?12l[?25h[?25l[0m[35mend[39m[K[32;112H[1m[7m4[16;9H[?12l[?25h[0m[17B[K[16;8H[?25l[32;112H[1m[7m3[16;8H[?12l[?25h[?25l[17B[0m:[?12l[?25hw[?25l[?12l[?25h[?25l"some_methods.rb" 17L, 123C written[4D[A[1m[7mruby]   [16;8H[?12l[?25h[0m[H[2J[34m[40m  16 [35m[49mend
+[34m[40m  17 
+[1m[49m~                                                                                                                           
+~                                                                                                                           
+~                                                                                                                           
+~                                                                                                                           
+~                                                                                                                           
+~                                                                                                                           
+~                                                                                                                           
+~                                                                                                                           
+~                                                                                                                           
+~                                                                                                                           
+~                                                                                                                           
+~                                                                                                                           
+~                                                                                                                           
+[0m[7m  1 bash                                                                                                                    [17B --                                                                                                                         [1;8H[27m[H[2J[34m[40m  16 [35m[49mend
+[34m[40m  17 
+[1m[49m~                                                                                                                           
+~                                                                                                                           
+~                                                                                                                           
+~                                                                                                                           
+~                                                                                                                           
+~                                                                                                                           
+~                                                                                                                           
+~                                                                                                                           
+~                                                                                                                           
+~                                                                                                                           
+~                                                                                                                           
+~                                                                                                                           
+~                                                                                                                           
+[0m[7m  1 bash                                                                                                                    [17B --                                                                                                                         [1;8H[27m[1m[7m[0m[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K[H[?25l[34m[40m  10 [39m[49m[35mdef[39m [36mmutator[39m(v)
+[34m[40m  11 [39m[49m  [36m@foo[39m = v
+[34m[40m  12 [39m[49m[35mend[39m
+[34m[40m  13 
+  14 [39m[49m[35mdef[39m [36mgetfoo[39m
+[34m[40m  15 [39m[49m  [36m@foo[39m
+[34m[40m  16 [39m[49m[35mend[39m
+[34m[40m  17 [39m[49m
+[1m[34m~                                                                                                                           
+~                                                                                                                           
+~                                                                                                                           
+~                                                                                                                           
+~                                                                                                                           [0m
+[1m[7msome_methods.rb [utf-8, unix] [ruby]                                                                           3, 16/17 Bot [7;8H[?12l[?25h[0m[10B[H[2J[34m[40m  10 [35m[49mdef[C[36mmutator[39m(v)
+[34m[40m  11 [2C[36m[49m@foo[C[39m= v
+[34m[40m  12 [35m[49mend
+[34m[40m  13 
+  14 [35m[49mdef[C[36mgetfoo
+[34m[40m  15 [2C[36m[49m@foo
+[34m[40m  16 [35m[49mend
+[34m[40m  17 
+[1m[49m~                                                                                                                           
+~                                                                                                                           
+~                                                                                                                           
+~                                                                                                                           
+~                                                                                                                           
+[7m[39msome_methods.rb [utf-8, unix] [ruby]                                                                           3, 16/17 Bot 
+
+[0m[7m  1 bash                                                                                                                    [17B  2 bash                                                                                                                    [16A[27mbenzrf@benzrf-laptop:~/quick_example$ # let's opa[Ken a new pry onto an instance of our class
+benzrf@benzrf-laptop:~/quick_example$ cd Foo
+bash: cd: Foo: No such file or directory
+benzrf@benzrf-laptop:~/quick_example$ cd quick_fuse_fs/Foo
+benzrf@benzrf-laptop:~/quick_example/quick_fuse_fs/Foo$ ls
+[34m[42m#singleton_class[39m[49m  some_methods.in_use.rb  some_methods.rb
+benzrf@benzrf-laptop:~/quick_example/quick_fuse_fs/Foo$ quick [K[K# the in_use file shows the current copy of the code being used
+benzrf@benzrf-laptop:~/quick_example/quick_fuse_fs/Foo$ cat som
+some_methods.in_use.rb  some_methods.rb         
+benzrf@benzrf-laptop:~/quick_example/quick_fuse_fs/Foo$ cat some_methods..[?5h                                                                                                                                                                                                                                                                                                                                                                                                                                          [?5l[Kin_use.rb 
+def foo(a, b)
+  c = a + b
+  a * b + c
+end
+
+def bar(z)[17;32r[32;1H
+  z - 100
+end
+
+def mutator(v)
+  @foo = v
+end
+
+def getfoo
+  @foo
+end
+
+benzrf@benzrf-laptop:~/quick_example/quick_fuse_fs/Foo$ [7;8H[?25l[H[1;13r[H[9L[34m[40m   1 [39m[49m[35mdef[39m [36mfoo[39m(a, b)
+[34m[40m   2 [39m[49m  c = a + b
+[34m[40m   3 [39m[49m  a * b + c
+[34m[40m   4 [39m[49m[35mend[39m
+[34m[40m   5 
+   6 [39m[49m[35mdef[39m [36mbar[39m(z)
+[34m[40m   7 [39m[49m  z - [31m100[39m
+[34m[40m   8 [39m[49m[35mend[39m
+[34m[40m   9 [39m[49m[14;116H[1m[7m1/17 Top[11;8H[?12l[?25h[?5h                                                                                                                                                                                                                                                                                                                                                                                                                                          [?5l[?25l[?12l[?25h[32;57H[0mquick pry[17;32r[32;1H
+[pry-remote-em] client connected to pryem://127.0.0.1:6463/
+[pry-remote-em] remote is PryRemoteEm 0.7.5 pryem
+
+[1mFrom:[0m /var/lib/gems/1.9.1/gems/quick-0.2.2/lib/quick/core_ext.rb @ line 5 Object#quick_binding:
+
+    [1m[34m4[0m: [32mdef[39m [1m[34mquick_binding[0m
+ => [1m[34m5[0m:  @quick_binding ||= binding
+    [1m[34m6[0m: [32mend[39m
+
+[1] pry(#<Foo>)> [15A[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K[15A[1] pry(#<Foo>)> mutator 3
+[A[1] pry(#<Foo>)> mutator [1m[34m3[0m
+
+=> [1m[34m3[0m
+
+[2] pry(#<Foo>)> exit
+[pry-remote-em] session terminated
+benzrf@benzrf-laptop:~/quick_example/quick_fuse_fs/Foo$ quick pry
+[pry-remote-em] client connected to pryem://127.0.0.1:6463/
+[pry-remote-em] remote is PryRemoteEm 0.7.5 pryem
+
+[1mFrom:[0m /var/lib/gems/1.9.1/gems/quick-0.2.2/lib/quick/core_ext.rb @ line 5 Object#quick_binding:
+
+    [1m[34m4[0m: [32mdef[39m [1m[34mquick_binding[0m
+ => [1m[34m5[0m:  @quick_binding ||= binding
+    [1m[34m6[0m: [32mend[39m
+
+[1] pry(#<Foo>)> getfoo
+[A[1] pry(#<Foo>)> getfoo
+
+=> [1m[34m3[0m
+
+[2] pry(#<Foo>)> # persistent instance!
+[A[2] pry(#<Foo>)> [1m[30m# persistent instance![0m
+
+[3] pry(#<Foo>)> [15A[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K[15A[3] pry(#<Foo>)> foo 4, 5
+[A[3] pry(#<Foo>)> foo [1m[34m4[0m, [1m[34m5[0m
+
+=> [1m[34m29[0m
+
+[4] pry(#<Foo>)> [11;8H[14;116H[1m[7m0[10;8H[14;112H 0, 9[9;6H[14;113H3, 8[8;8H[14;116H7[7;8H[14;116H6[6;8H[14;113H0, 5[5;6H[14;113H3, 4[4;8H[14;116H3[3;8H[14;116H2[2;8H[14;116H3[3;8H[?25l[0m[12B[1m-- INSERT --[0m[14;112H[1m[7m12[3;17H[?12l[?25h[?25l[14;32H+][ruby][73C3[3;18H[?12l[?25h[?25l[0m*[14;113H[1m[7m4[3;19H[?12l[?25h[?25l[14;113H5[3;20H[?12l[?25h[?25l[0m[31m1[39m[14;113H[1m[7m6[3;21H[?12l[?25h[?25l[0m[31m0[39m[14;113H[1m[7m7[3;22H[?12l[?25h[0m[12B[K[?25l[14;113H[1m[7m6[3;21H[?12l[?25h[?25l[12B[0m:[?12l[?25hw[?25l[?12l[?25h[?25l"some_methods.rb" 17L, 128C written[14;32H[1m[7mruby]   [3;21H[?12l[?25h[21;18H[0mfoo 4, 5
+[A[4] pry(#<Foo>)> foo [1m[34m4[0m, [1m[34m5[0m
+
+=> [1m[34m110[0m
+
+[5] pry(#<Foo>)> # live updates!
+[A[5] pry(#<Foo>)> [1m[30m# live updates![0m
+
+[6] pry(#<Foo>)> exit
+[pry-remote-em] session terminated
+benzrf@benzrf-laptop:~/quick_example/quick_fuse_fs/Foo$ quick pry -m
+[pry-remote-em] client connected to pryem://127.0.0.1:6463/
+[pry-remote-em] remote is PryRemoteEm 0.7.5 pryem
+
+[1mFrom:[0m /var/lib/gems/1.9.1/gems/quick-0.2.2/lib/quick/core_ext.rb @ line 5 Object#quick_binding:
+
+    [1m[34m4[0m: [32mdef[39m [1m[34mquick_binding[0m
+ => [1m[34m5[0m:  @quick_binding ||= binding
+    [1m[34m6[0m: [32mend[39m
+
+[1] pry(Foo)>  # [K[K[K# by using -m we can get [K[K[Ket a pry in the module ins[K[Ktself, instead of in an instance
+[A[1] pry(Foo)> [1m[30m# by using -m we can get a pry in the module itself, instead of in an instance[0m
+
+[2] pry(Foo)> [15A[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K[15A[2] pry(Foo)> def self.f[Kbar
+[A[2] pry(Foo)> [32mdef[39m [1m[36mself[0m.[1m[34mbar[0m
+
+[2] pry(Foo)*   100
+[A[2] pry(Foo)*   [1m[34m100[0m
+
+[2] pry(Foo)*   end
+[A[2] pry(Foo)* [32mend[39m  
+
+=> [1m[36mnil[0m
+
+[3] pry(Foo)> exit
+[pry-remote-em] session terminated
+benzrf@benzrf-laptop:~/quick_example/quick_fuse_fs/Foo$ quick pry -m[K
+s[pry-remote-em] client connected to pryem://127.0.0.1:6463/
+[28;124H [28;124H[pry-remote-em] remote is PryRemoteEm 0.7.5 pryem
+
+[1mFrom:[0m /var/lib/gems/1.9.1/gems/quick-0.2.2/lib/quick/core_ext.rb @ line 5 Object#quick_binding:
+
+    [1m[34m4[0m: [32mdef[39m [1m[34mquick_binding[0m
+ => [1m[34m5[0m:  @quick_binding ||= binding
+    [1m[34m6[0m: [32mend[39m
+
+[1] pry(#<Foo>)> self.class.bar
+[A[1] pry(#<Foo>)> [1m[36mself[0m.class.bar
+
+=> [1m[34m100[0m
+
+[2] pry(#<Foo>)> # works as ep[Kxpected.
+[A[2] pry(#<Foo>)> [1m[30m# works as expected.[0m
+
+[3] pry(#<Foo>)> exit
+[pry-remote-em] session terminated
+benzrf@benzrf-laptop:~/quick_example/quick_fuse_fs/Foo$ ls -a
+[34m[42m.[39m[49m  [34m[42m..[39m[49m  .ruby-version.in_use.rb  .ruby-version.rb  [34m[42m#singleton_class[39m[49m  some_methods.in_use.rb  some_methods.rb
+benzrf@benzrf-laptop:~/quick_example/quick_fuse_fs/Foo$ # there is also a # [Ksingle\#singleton_class/ directory
+benzrf@benzrf-laptop:~/quick_example/quick_fuse_fs/Foo$ cd #\#singleton_class/
+benzrf@benzrf-laptop:~/quick_example/quick_fuse_fs/Foo/#singleton_class$ clear
+[15A[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K[15Abenzrf@benzrf-laptop:~/quick_example/quick_fuse_fs/Foo/#singleton_class$ ls
+[34m[42m#singleton_class[39m[49m
+benzrf@benzrf-laptop:~/quick_example/quick_fuse_fs/Foo/#singleton_class$ # this dir is the singleton class for Foo
+benzrf@benzrf-laptop:~/quick_example/quick_fuse_fs/Foo/#singleton_class$ # we could have also defined whatever in a .rb file  here
+benzrf@benzrf-laptop:~/quick_example/quick_fuse_fs/Foo/#singleton_class$ # that mostly concludes this demo.
+benzrf@benzrf-laptop:~/quick_example/quick_fuse_fs/Foo/#singleton_class$ # try quick today!!!!!!!!!
+benzrf@benzrf-laptop:~/quick_example/quick_fuse_fs/Foo/#singleton_class$ quick stop
+benzrf@benzrf-laptop:~/quick_example/quick_fuse_fs/Foo/#singleton_class$ exit
+[1;33r[H[2J[34m[40m   1 [35m[49mdef[C[36mfoo[39m(a, b)
+[34m[40m   2 [2C[39m[49mc = a + b
+[34m[40m   3 [2C[39m[49ma * b + c * [31m10
+[34m[40m   4 [35m[49mend
+[34m[40m   5 
+   6 [35m[49mdef[C[36mbar[39m(z)
+[34m[40m   7 [2C[39m[49mz - [31m100
+[34m[40m   8 [35m[49mend
+[34m[40m   9 
+  10 [35m[49mdef[C[36mmutator[39m(v)
+[34m[40m  11 [2C[36m[49m@foo[C[39m= v
+[34m[40m  12 [35m[49mend
+[34m[40m  13 
+[1m[7m[39m[49msome_methods.rb [utf-8, unix] [ruby]                                                                           16, 3/17 Top 
+[0m"some_methods.rb" 17L, 128C written
+[7m  1 bash                                                                                                                    
+[27mW, [2014-04-03T10:53:59.091689 #15803]  WARN -- : [pry-remote-em broker] unregister pryem://127.0.0.1:6463/
+I, [2014-04-03T10:54:03.066009 #15803]  INFO -- : [pry-remote-em] listening for connections on pryem://localhost:6463/
+I, [2014-04-03T10:54:03.068492 #15803]  INFO -- : [pry-remote-em broker] registered pryem://127.0.0.1:6463/ - "Foo"
+I, [2014-04-03T10:54:03.965154 #15803]  INFO -- : [pry-remote-em] received client connection from 127.0.0.1:49442
+I, [2014-04-03T10:54:03.965475 #15803]  INFO -- : pryem://127.0.0.1:6463/ PryRemoteEm 0.7.5 pryem
+D, [2014-04-03T10:54:23.986201 #15803] DEBUG -- : [pry-remote-em] remote session terminated (:)
+W, [2014-04-03T10:54:23.987376 #15803]  WARN -- : [pry-remote-em broker] unregister pryem://127.0.0.1:6463/
+I, [2014-04-03T10:54:26.555670 #15803]  INFO -- : [pry-remote-em] listening for connections on pryem://localhost:6463/
+I, [2014-04-03T10:54:26.558547 #15803]  INFO -- : [pry-remote-em broker] registered pryem://127.0.0.1:6463/ - "#<Foo>"
+I, [2014-04-03T10:54:27.450286 #15803]  INFO -- : [pry-remote-em] received client connection from 127.0.0.1:49444
+I, [2014-04-03T10:54:27.450547 #15803]  INFO -- : pryem://127.0.0.1:6463/ PryRemoteEm 0.7.5 pryem
+D, [2014-04-03T10:54:35.411465 #15803] DEBUG -- : [pry-remote-em] remote session terminated (:)
+W, [2014-04-03T10:54:35.414890 #15803]  WARN -- : [pry-remote-em broker] unregister pryem://127.0.0.1:6463/
+Unmounting /home/benzrf/quick_example/quick_fuse_fs
+I, [2014-04-03T10:55:11.470721 #15803]  INFO -- : [pry-remote-em broker-client] broker connection unbound starting a new one
+benzrf@benzrf-laptop:~/quick_example$
+[7m  0 bash                                                                                                                    [32;39H[27m[Kbenzrf@benzrf-laptop:~/quick_example$ exit[17;32r[32;1H
+[1;33r[H[2J[34m[40m   1 [35m[49mdef[C[36mfoo[39m(a, b)
+[34m[40m   2 [2C[39m[49mc = a + b
+[34m[40m   3 [2C[39m[49ma * b + c * [31m10
+[34m[40m   4 [35m[49mend
+[34m[40m   5 
+   6 [35m[49mdef[C[36mbar[39m(z)
+[34m[40m   7 [2C[39m[49mz - [31m100
+[34m[40m   8 [35m[49mend
+[34m[40m   9 
+  10 [35m[49mdef[C[36mmutator[39m(v)
+[34m[40m  11 [2C[36m[49m@foo[C[39m= v
+[34m[40m  12 [35m[49mend
+[34m[40m  13 
+[1m[7m[39m[49msome_methods.rb [utf-8, unix] [ruby]                                                                           16, 3/17 Top 
+[0m"some_methods.rb" 17L, 128C written
+[7m  1 bash                                                                                                                    [17B --                                                                                                                         [27m[16A[15B[7mReally quit and kill all your windows [y/n][27m[K[K[15A[?1l>[33;1H
+[?1049l[screen is terminating]
+
+Script done on Thu 03 Apr 2014 10:55:16 AM EDT
