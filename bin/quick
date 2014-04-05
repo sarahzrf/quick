@@ -1,8 +1,8 @@
 #!/usr/bin/env ruby
 require 'thor'
 require 'brb'
-require 'pathname'
 require 'uri'
+require 'fileutils'
 require_relative '../lib/quick'
 
 class QuickCLI < Thor
@@ -14,7 +14,23 @@ class QuickCLI < Thor
 
 	desc 'start MOUNT_DIR', "run Quick, mounting the FS on MOUNT_DIR"
 	option :foreground, type: :boolean, aliases: :f
+	option :no_checkpoint, type: :boolean, aliases: :n
 	def start(dir)
+		silent = '> /dev/null 2> /dev/null'
+		dmtcp_command = (!options.no_checkpoint? and
+										 system "which git #{silent}" and
+										 %w/dmtcp_checkpoint dmtcp_launch/.
+										 detect {|cmd| system "which #{cmd} #{silent}"})
+		if dmtcp_command
+			git_dir = File.join(Dir.home, '.quick', File.basename(dir))
+			FileUtils.mkdir_p git_dir
+			Dir.chdir git_dir do
+				unless system "git rev-parse --git-dir #{silent}"
+					system "git init #{silent}"
+				end
+			end
+			exec dmtcp_command, '-c', git_dir, '--new-coordinator', $0, *ARGV, '-n'
+		end
 		if File.file? dir or
 			(File.directory? dir and Dir.entries(dir).size > 2)
 			puts "cannot mount on #{dir}"
@@ -44,7 +60,7 @@ class QuickCLI < Thor
 	option :module, type: :boolean, aliases: :m
 	def pry
 		uri = Quick.pry_here !options.module?
-		system "pry-remote-em #{uri}"
+		system "pry-remote-em", uri
 	end
 
 	desc 'module NAME', "create a new module here"
