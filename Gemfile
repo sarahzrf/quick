@@ -5,4 +5,6 @@ gem 'ruby_parser'
 gem 'pry-remote-em'
 gem 'brb'
 gem 'thor'
+gem 'git'
+gem 'ffi'
 
