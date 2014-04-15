@@ -15,6 +15,16 @@ module PryRemoteEm::Server
 	end
 end
 
+class Object
+	def quick_pry
+		if Quick::Service.pries.key? self
+			Quick::Service.pries[self]
+		else
+			Quick::Service.pries[self] = remote_pry_em 'localhost', :auto
+		end
+	end
+end
+
 module Quick
 	module Service
 		extend self
@@ -93,11 +103,7 @@ module Quick
 			else
 				mod.quick_binding
 			end
-			if pries.key? target
-				pries[target]
-			else
-				pries[target] = target.remote_pry_em 'localhost', :auto
-			end
+			target.quick_pry
 		end
 
 		def mount_point
