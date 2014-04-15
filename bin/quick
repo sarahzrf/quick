@@ -3,6 +3,7 @@ require 'thor'
 require 'brb'
 require 'uri'
 require 'fileutils'
+require 'git'
 require_relative '../lib/quick'
 
 class QuickCLI < Thor
@@ -17,19 +18,18 @@ class QuickCLI < Thor
 	option :no_checkpoint, type: :boolean, aliases: :n
 	def start(dir)
 		silent = '> /dev/null 2> /dev/null'
-		dmtcp_command = (!options.no_checkpoint? and
-										 system "which git #{silent}" and
-										 %w/dmtcp_checkpoint dmtcp_launch/.
-										 detect {|cmd| system "which #{cmd} #{silent}"})
-		if dmtcp_command
+		using_dmtcp = !options.no_checkpoint? and
+			system "which git #{silent}" and
+			system "dmtcp_launch #{silent}"
+		if using_dmtcp
 			git_dir = File.join(Dir.home, '.quick', File.basename(dir))
 			FileUtils.mkdir_p git_dir
-			Dir.chdir git_dir do
-				unless system "git rev-parse --git-dir #{silent}"
-					system "git init #{silent}"
-				end
+			begin
+				Git.open git_dir
+			rescue ArgumentError
+				Git.init git_dir
 			end
-			exec dmtcp_command, '-c', git_dir, '--new-coordinator', $0, *ARGV, '-n'
+			exec 'dmtcp_launch', '-c', git_dir, '--new-coordinator', $0, *ARGV, '-n'
 		end
 		if File.file? dir or
 			(File.directory? dir and Dir.entries(dir).size > 2)
@@ -79,6 +79,19 @@ class QuickCLI < Thor
 	def eval(code)
 		result = Quick.eval_here code, !options.module?
 		puts "=> #{result}"
+	end
+
+	desc 'checkpoint MESSAGE', "take a snapshot of this Quick instance and commit it to the repository"
+	def checkpoint(msg)
+		Quick.checkpoint msg
+	end
+
+	desc 'git COMMAND', "run a command on the repository for this Quick instance"
+	def git(*args)
+		repo = Git.open Quick.repo
+		old_head = repo.log.first
+		system 'git', args
+		Quick.load unless repo.log.first == old_head
 	end
 end
 

@@ -58,6 +58,27 @@ module Quick
 		raise "invalid class name"
 	end
 
+	def checkpointing?
+		brb_service.checkpointing_block
+	end
+
+	def repo
+		raise "checkpointing is not enabled!" unless checkpointing?
+		brb_service.repo_block
+	end
+
+	def checkpoint(msg)
+		raise "checkpointing is not enabled!" unless checkpointing?
+		brb_service.hibernate msg
+		sleep 1
+	end
+
+	def load
+		raise "checkpointing is not enabled!" unless checkpointing?
+		brb_service.load
+		sleep 1
+	end
+
 	def pwd_from_root
 		from_root Dir.pwd
 	end

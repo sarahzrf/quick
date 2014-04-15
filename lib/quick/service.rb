@@ -1,5 +1,6 @@
 require 'pry-remote-em/server'
 require 'brb'
+require 'git'
 require_relative 'core_ext'
 require_relative 'fs'
 
@@ -29,15 +30,25 @@ module Quick
 	module Service
 		extend self
 
+		attr_reader :checkpointing
+
 		# warning: run/stop/hibernate are pretty awful because I
 		# don't actually know how to use EventMachine properly.
 		# If you know how to make these better, PLEASE feel free
 		# to submit a pull request!
-		def run(mount_point)
+		def run(mount_point, checkpointing=true)
+			raise "already running" if @running
+			@mount_point = File.absolute_path mount_point
+			@checkpointing = checkpointing
+			if checkpointing
+				require_relative 'dmtcp'
+				begin
+					DMTCP.load
+				rescue Errno::ENOENT
+				end
+			end
+			@root = FS::ModuleDir.new Object
 			loop do
-				raise "already running" if @running
-				@mount_point = File.absolute_path mount_point
-				@root = FS::ModuleDir.new Object
 				Thread.new do
 					FuseFS.start @root, @mount_point
 				end
@@ -45,8 +56,8 @@ module Quick
 					BrB::Service.start_service object: self
 					@running = true
 				end
+				@on_stop and @on_stop.call
 				if @hibernating
-					sleep 10
 					@hibernating = false
 				else
 					break
@@ -56,18 +67,30 @@ module Quick
 			FuseFS.unmount
 		end
 
-		def stop
+		def stop(&blk)
 			raise "not running" unless @running
 			@running = false
+			@on_stop = blk
 			FuseFS.unmount
 			FuseFS.exit
 			BrB::Service.stop_service
 			EM.stop
 		end
 
-		def hibernate
+		def hibernate(msg)
 			@hibernating = true
-			stop
+			stop do
+				DMTCP.checkpoint
+				repo = Git.open repo
+				repo.add all: true
+				repo.commit_all msg
+			end
+		end
+
+		def load
+			stop do
+				DMTCP.load
+			end
 		end
 
 		def eval(module_path, code, instance=true)
@@ -108,6 +131,10 @@ module Quick
 
 		def mount_point
 			@mount_point
+		end
+
+		def repo
+			File.join(Dir.home, '.quick', File.basename(@mount_point))
 		end
 
 		def resolve_path(path)
