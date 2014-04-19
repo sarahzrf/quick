@@ -18,5 +18,7 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency 'pry-remote-em'
   s.add_runtime_dependency 'brb'
   s.add_runtime_dependency 'thor'
+  s.add_runtime_dependency 'git'
+  s.add_runtime_dependency 'ffi'
 end
 
