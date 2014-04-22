@@ -5,7 +5,7 @@ require_relative 'quick/service'
 module Quick
 	extend self
 
-	VERSION = '0.2.2'
+	VERSION = '0.3.0'
 
 	def brb_service
 		@brb_service ||=

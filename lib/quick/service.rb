@@ -37,7 +37,7 @@ module Quick
 			loop do
 				raise "already running" if @running
 				@mount_point = File.absolute_path mount_point
-				@root = FS::ModuleDir.new Object
+				@root = FS::ModuleDir.new Object, @mount_point
 				Thread.new do
 					FuseFS.start @root, @mount_point
 				end

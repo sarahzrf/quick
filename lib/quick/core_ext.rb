@@ -14,9 +14,9 @@ class Module
 	end
 
 	def code_files
-		@code_files ||= Hash.new do |h, k|
-			h[k] = Quick::FS::CodeFile.new self, k
-		end
+		@code_files ||= {} #Hash.new do |h, k|
+			#h[k] = Quick::FS::CodeFile.new self, k
+		#end
 	end
 end
 

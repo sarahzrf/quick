@@ -75,8 +75,8 @@ module Quick
 
 			attr_reader :in_use
 
-			def initialize(mod, name)
-				@mod, @name = mod, name
+			def initialize(dir, name)
+				@dir, @name = dir, name
 				@source = ''
 				@in_use = ROCodeFile.new @source
 			end
@@ -106,9 +106,14 @@ module Quick
 				[@atime ||= now, @mtime ||= now, @ctime ||= now]
 			end
 
+			def absolute_path
+				File.join @dir.absolute_path, @name
+			end
+
 			private
 
 			def eval!
+				Parser.reset
 				sexp = Parser.parse @source
 				raise ArgumentError, "no source" unless sexp
 				is_meth = sexp.node_type == :defn
@@ -117,12 +122,11 @@ module Quick
 				unless is_meth or is_meths or @name == 'header.rb'
 					raise ArgumentError, "not 1 or more method definitions"
 				end
-				@mod.module_eval @source
+				absolute_path =~ /\A(.+)\.rb\Z/
+				@dir.mod.module_eval @source, ($1 + 'in_use.rb')
 				@in_use.source = @source
 				@in_use.mtime = @in_use.ctime = Time.now
-			rescue Racc::ParseError => e
-				raise ArgumentError, e.message
-			rescue StandardError => e
+			rescue Racc::ParseError, StandardError => e
 				raise ArgumentError, e.message
 			end
 		end
@@ -149,8 +153,11 @@ module Quick
 				end
 			end
 
-			def initialize(mod)
+			attr_reader :mod
+
+			def initialize(mod, dir)
 				@mod = mod
+				@dir = dir
 			end
 
 			other_methods = FuseFS::DEFAULT_FS.class.instance_methods(false)
@@ -177,6 +184,11 @@ module Quick
 			path_method :directory?, true
 			path_method :can_write?, true
 
+			path_method :absolute_path do
+				next @dir if @dir.is_a? String
+				File.join @dir.absolute_path, @mod.name.split('::').last
+			end
+
 			private
 
 			def path_parts(path)
@@ -192,7 +204,7 @@ module Quick
 				when '#brb_uri'
 					BrBURI
 				when '#singleton_class'
-					self.class.new @mod.singleton_class
+					self.class.new @mod.singleton_class, self
 				else
 					begin
 						subdir name
@@ -203,7 +215,7 @@ module Quick
 			end
 
 			def subdir(name)
-				self.class.new @mod.const_get(name)
+				self.class.new @mod.const_get(name), self
 			rescue NameError
 				raise Errno::ENOENT
 			end
@@ -211,7 +223,7 @@ module Quick
 			def subfile(name)
 				raise Errno::ENOENT unless name.end_with? '.rb'
 				unless name =~ /\A(.+)\.in_use.rb\Z/
-					@mod.code_files[name]
+					@mod.code_files[name] ||= CodeFile.new self, name
 				else
 					name = $1 + '.rb'
 					raise Errno::ENOENT unless @mod.code_files.key? name
